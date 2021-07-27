@@ -1,0 +1,8 @@
+version: '3'
+services: 
+    quarkus-tryout:
+        build:
+            context: .
+            dockerfile: src/main/docker/Dockerfile.native-distroless
+        ports:
+            - "8080:8080"

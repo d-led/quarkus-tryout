@@ -1,0 +1,88 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id 'info.solidsoft.pitest' version '1.5.1'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+pitest {
+    targetClasses = [
+            'com.github.d.led.services.*'
+    ]  //by default "${project.group}.*"
+//    threads = 4
+    outputFormats = ['XML', 'HTML']
+    useClasspathFile = true
+    mutators = [
+            "STRONGER",
+            "AOR",
+            "AOD"
+    ]
+    timestampedReports = false
+//    verbose = true
+    junit5PluginVersion = '0.14'
+    excludedTestClasses = [
+            'com.github.d.controllers.*',
+            'com.github.d.properties.*',
+    ]
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-arc'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+
+    testImplementation "net.jqwik:jqwik:${jqwikVersion}"
+}
+
+group 'com.github.d.led'
+version '0.0.1'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+    // To enable argument names in reporting and debugging
+    options.compilerArgs += '-parameters'
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter'
+        excludeTags 'properties'
+    }
+}
+
+task jqwik(type: Test) {
+    useJUnitPlatform {
+        includeEngines 'jqwik'
+    }
+    include '**/*Properties.class'
+}
+
+tasks.withType(Test) {
+    afterTest { testName, result ->
+        def elapsed = result.endTime - result.startTime
+        println "$testName took $elapsed ms."
+    }
+}

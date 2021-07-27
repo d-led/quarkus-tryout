@@ -1,0 +1,22 @@
+FROM ghcr.io/graalvm/graalvm-ce:latest as builder
+
+RUN gu install native-image
+
+WORKDIR /src
+
+COPY gradle* /src/
+COPY gradle/ /src/gradle
+
+RUN ./gradlew --version
+
+COPY . /src/
+
+RUN ./gradlew build -Dquarkus.package.type=native
+
+FROM quay.io/quarkus/quarkus-distroless-image:1.0
+COPY --from=builder /src/build/*-runner /runner
+
+EXPOSE 8080
+USER nonroot
+
+CMD ["./runner", "-Dquarkus.http.host=0.0.0.0"]
