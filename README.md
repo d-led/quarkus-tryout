@@ -60,7 +60,7 @@ docker-compose up --build
 pre-built:
 
 ```shell
-docker run -p 8080:8080 ghcr.io/d-led/quarkus-tryout:master
+docker run --rm --name="quarkus-tryout" -p 8080:8080 ghcr.io/d-led/quarkus-tryout:master
 ```
 
 &darr; http://localhost:8080/hello/multiply?a=11&b=32
