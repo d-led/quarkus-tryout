@@ -1,6 +1,7 @@
 version: '3'
 services: 
     quarkus-tryout:
+        image: ghcr.io/d-led/quarkus-tryout:master
         build:
             context: .
             dockerfile: src/main/docker/Dockerfile.native-distroless

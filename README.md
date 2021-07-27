@@ -51,8 +51,16 @@ If you want to learn more about building native executables, please consult http
 
 ## Building and Running in Docker
 
+build-it-yourself:
+
 ```shell
 docker-compose up --build
+```
+
+pre-built:
+
+```shell
+docker run -p 8080:8080 ghcr.io/d-led/quarkus-tryout:master
 ```
 
 &darr; http://localhost:8080/hello/multiply?a=11&b=32
