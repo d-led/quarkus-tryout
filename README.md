@@ -1,5 +1,7 @@
 # quarkus-tryout
 
+[![Java CI with Gradle](https://github.com/d-led/quarkus-tryout/actions/workflows/gradle.yml/badge.svg)](https://github.com/d-led/quarkus-tryout/actions/workflows/gradle.yml) [![Docker](https://github.com/d-led/quarkus-tryout/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/d-led/quarkus-tryout/actions/workflows/docker-publish.yml)
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
