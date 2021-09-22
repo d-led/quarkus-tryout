@@ -76,7 +76,7 @@ docker run --rm --name="quarkus-tryout" -p 8080:8080 ghcr.io/d-led/quarkus-tryou
   ([no injection](https://quarkus.io/guides/getting-started-testing#native-executable-testing) 
   due to the compilation mode): `gradle testNative`
 - mutation testing: `gradle pitest`
-  &rarr; open [open build/reports/pitest/index.html](open build/reports/pitest/index.html )
+  &rarr; open [build/reports/pitest/index.html](build/reports/pitest/index.html )
   &rarr; `Replaced integer multiplication with addition → SURVIVED`
   &rarr; adding another test case for a full mutation coverage
   &rarr; ok
