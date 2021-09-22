@@ -12,8 +12,7 @@ repositories {
 pitest {
     targetClasses = [
             'com.github.d.led.services.*'
-    ]  //by default "${project.group}.*"
-//    threads = 4
+    ]
     outputFormats = ['XML', 'HTML']
     useClasspathFile = true
     mutators = [
